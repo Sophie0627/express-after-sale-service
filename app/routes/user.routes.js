@@ -1,5 +1,6 @@
 const { authJwt } = require("../middlewares");
 const controller = require("../controllers/user.controller");
+const { get } = require("mongoose");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -9,6 +10,16 @@ module.exports = function(app) {
     );
     next();
   });
+
+  app.get("/api/users", [authJwt.verifyToken, authJwt.isAdmin], controller.findAllUsers);
+
+  app.get(
+    "/api/user/:id", 
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.findOneUser
+  );
+
+  app.delete("/api/user/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.delete);
 
   app.get("/api/test/all", controller.allAccess);
 

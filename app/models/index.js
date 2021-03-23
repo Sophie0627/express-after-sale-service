@@ -7,7 +7,9 @@ db.mongoose = mongoose;
 
 db.user = require("./user.model");
 db.role = require("./role.model");
+db.status = require("./status.model");
 
 db.ROLES = ["client", "admin", "technicien"];
+db.STATUS = ["pending", "accepted", "completed"];
 
 module.exports = db;

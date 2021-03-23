@@ -60,6 +60,8 @@ exports.signup = (req, res) => {
       });
     }
   });
+  user.createAt;
+  user.updateAt;
 };
 
 exports.signin = (req, res) => {
