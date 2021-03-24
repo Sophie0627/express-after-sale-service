@@ -47,22 +47,6 @@ exports.createService = (req, res) => {
         });
     });
 
-    // Status.findOne({ name: "pending"}, (err, status) => {
-    //     if (err) {
-    //         res.status(500).send({ message: err });
-    //         return;
-    //     }
-
-    //     service.status = status._id;
-    // });
-
-    // service.save((err, user) => {
-    //     if (err) {
-    //         res.status(500).send({ message: err});
-    //         return;
-    //     }
-    //     res.status(200).send({ message: "Service was registered successfully!"});
-    // });
     service.createAt;
     service.updateAt;
 }
