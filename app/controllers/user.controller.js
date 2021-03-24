@@ -1,25 +1,40 @@
 const db = require("../models");
 const User = db.user;
 
-// exports.allAccess = (req, res) => {
-//   res.status(200).send("Public Content.");
-// };
+exports.createTechnicien = (req, res) => {
+  console.log("create technicien");
+  const user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 8)
+  });
 
-// exports.userBoard = (req, res) => {
-//   res.status(200).send("User Content.");
-// };
+  user.save((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
 
-// exports.adminBoard = (req, res) => {
-//   res.status(200).send("Admin Content.");
-// };
+    Role.findOne({ name: "technicien" }, (err, role) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
 
-// exports.moderatorBoard = (req, res) => {
-//   res.status(200).send("Moderator Content.");
-// };
+      user.roles = [role._id];
+      user.save(err => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
 
-// exports.create = (req, res) => {
-
-// };
+        res.send({ message: "Technicien was registered successfully!" });
+      });
+    });
+  });
+  user.createAt;
+  user.updateAt;
+};
 
 exports.findAllUsers = (req, res) => {
   User.find()

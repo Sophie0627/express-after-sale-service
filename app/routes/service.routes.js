@@ -13,6 +13,8 @@ module.exports = function(app) {
 
     app.get("/api/services", [authJwt.verifyToken], controller.findAllServices);
 
+    app.get("/api/services_by_client/:id", [authJwt.verifyToken], controller.findByClient);
+
     app.post("/api/service", [authJwt.verifyToken], controller.createService);
 
     app.get("/api/service/:id", [authJwt.verifyToken], controller.findOneService);

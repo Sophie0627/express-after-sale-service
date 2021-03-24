@@ -1,4 +1,5 @@
 const { authJwt } = require("../middlewares");
+const { verifySignUp } = require("../middlewares");
 const controller = require("../controllers/user.controller");
 const { get } = require("mongoose");
 
@@ -17,6 +18,15 @@ module.exports = function(app) {
     "/api/user/:id", 
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.findOneUser
+  );
+
+  app.post("/api/user/technicien", 
+    [
+      verifySignUp.checkDuplicateUsernameOrEmail, 
+      verifySignUp.checkRolesExisted, 
+      authJwt.isAdmin
+    ], 
+    controller.createTechnicien
   );
 
   app.delete("/api/user/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteUser);

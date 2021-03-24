@@ -96,3 +96,26 @@ exports.updateService = (req, res) => {
         });
     });
 };
+
+exports.findByClient = (req, res) => {
+    const clientId = req.params.id;
+
+    User.findById(clientId, (err, user) => {
+        if (err) {
+            res.status(500).send({ message: "Wrong ClientId" });
+            return;
+        }
+
+        var ObjectId = require('mongoose').Types.ObjectId; 
+    
+        Service.find({'client' : new ObjectId(clientId)})
+        .then(data => {
+            if(!data) {
+                res.status(404).send({ message: "Cannot find services"});
+            } else res.status(200).send(data);
+        })
+        .catch(err => {
+            res.status(500).send({ message: err });
+        });
+    });
+}
