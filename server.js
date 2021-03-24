@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./app/models");
 const dbConfig = require("./app/config/db.config")
 const Role = db.role;
+const Status = db.status;
 
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
@@ -68,16 +69,51 @@ function initial() {
         });
       }
     });
+
+    Status.estimatedDocumentCount((err, count) => {
+      if (!err && count === 0) {
+        new Status({
+          name: "pending"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'pedding' to statuses collection");
+        });
+  
+        new Status({
+          name: "accepted"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'accepted' to statuses collection");
+        });
+  
+        new Status({
+          name: "completed"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'completed' to statuses collection");
+        });
+      }
+    });
   }
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome" });
 });
 
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/service.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

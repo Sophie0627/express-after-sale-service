@@ -19,21 +19,21 @@ module.exports = function(app) {
     controller.findOneUser
   );
 
-  app.delete("/api/user/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.delete);
+  app.delete("/api/user/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteUser);
 
-  app.get("/api/test/all", controller.allAccess);
+  // app.get("/api/test/all", controller.allAccess);
 
-  app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
+  // app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
 
-  app.get(
-    "/api/test/mod",
-    [authJwt.verifyToken, authJwt.isTechnicien],
-    controller.moderatorBoard
-  );
+  // app.get(
+  //   "/api/test/mod",
+  //   [authJwt.verifyToken, authJwt.isTechnicien],
+  //   controller.moderatorBoard
+  // );
 
-  app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
-  );
+  // app.get(
+  //   "/api/test/admin",
+  //   [authJwt.verifyToken, authJwt.isAdmin],
+  //   controller.adminBoard
+  // );
 };

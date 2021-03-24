@@ -8,6 +8,8 @@ db.mongoose = mongoose;
 db.user = require("./user.model");
 db.role = require("./role.model");
 db.status = require("./status.model");
+db.service = require("./service.model");
+db.review = require("./review.model");
 
 db.ROLES = ["client", "admin", "technicien"];
 db.STATUS = ["pending", "accepted", "completed"];

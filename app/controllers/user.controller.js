@@ -1,21 +1,21 @@
 const db = require("../models");
 const User = db.user;
 
-exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
-};
+// exports.allAccess = (req, res) => {
+//   res.status(200).send("Public Content.");
+// };
 
-exports.userBoard = (req, res) => {
-  res.status(200).send("User Content.");
-};
+// exports.userBoard = (req, res) => {
+//   res.status(200).send("User Content.");
+// };
 
-exports.adminBoard = (req, res) => {
-  res.status(200).send("Admin Content.");
-};
+// exports.adminBoard = (req, res) => {
+//   res.status(200).send("Admin Content.");
+// };
 
-exports.moderatorBoard = (req, res) => {
-  res.status(200).send("Moderator Content.");
-};
+// exports.moderatorBoard = (req, res) => {
+//   res.status(200).send("Moderator Content.");
+// };
 
 // exports.create = (req, res) => {
 
@@ -24,7 +24,6 @@ exports.moderatorBoard = (req, res) => {
 exports.findAllUsers = (req, res) => {
   User.find()
   .then(results => {
-    console.log(results);
     res.status(200).send(results);
   })
   .catch(error => console.error(error));
@@ -32,8 +31,6 @@ exports.findAllUsers = (req, res) => {
 
 exports.findOneUser = (req, res) => {
   const id = req.params.id;
-
-  console.log("[userID]", id);
 
   User.findById(id)
   .then(data => {
@@ -51,7 +48,7 @@ exports.findOneUser = (req, res) => {
 
 // };
 
-exports.delete = (req, res) => {
+exports.deleteUser = (req, res) => {
   const id = req.params.id;
 
   User.findByIdAndRemove(id)
@@ -68,10 +65,10 @@ exports.delete = (req, res) => {
   })
 };
 
-exports.deleteAll = (req, res) => {
+// exports.deleteAll = (req, res) => {
 
-};
+// };
 
-exports.findAllPublished = (req, res) => {
+// exports.findAllPublished = (req, res) => {
 
-};
+// };
